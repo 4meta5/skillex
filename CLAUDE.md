@@ -1,4 +1,5 @@
 ## Installed Skills
+- @.claude/skills/elon-musk/SKILL.md
 - @.claude/skills/rick-rubin/SKILL.md
 - @.claude/skills/tdd/SKILL.md
 - @.claude/skills/code-review-ts/SKILL.md

@@ -9,21 +9,14 @@ Source of truth for the hooks-to-skillex package migration. Produced in Phase 1.
 | `@4meta5/skill-loader` | **MOVE** | Pure SKILL.md parser. No enforcement. Leaf dependency (only `yaml`). |
 | `@4meta5/project-detector` | **MOVE** | Pure tech stack detection. No enforcement. Leaf dependency. |
 | `@4meta5/semantic-matcher` | **MOVE** | Pure search/matching utility. No enforcement. Leaf dependency. |
-| `@4meta5/workflow-enforcer` | **STAY** | IS enforcement. State machine for TDD/review gates. |
-| `@4meta5/chain` | **STAY** | Exports hook enforcement for tool gating. Core to hooks. |
+| `@4meta5/workflow-enforcer` | **MOVE** | State machine for TDD/review gates. Moves to skillex with other packages. |
+| `@4meta5/chain` | **MOVE** | Declarative skill chaining. Moves to skillex with other packages. |
 | `@4meta5/skills` | **MOVE** | Core skill library. Not enforcement. Depends on `skill-loader` (also moves). |
-| `@4meta5/skills-cli` | **SPLIT** | CLI binary stays in hooks. Extractable modules detailed below. |
+| `@4meta5/skills-cli` | **MOVE** | Full CLI package moves to skillex. hooks owns hook assets/runtime only. |
 
 ## CLI Module Dispositions
 
-| Module | Disposition | Target | Rationale |
-|--------|------------|--------|-----------|
-| `claudemd.ts` + `shared/markdown.ts` | MOVE | `skills` package | Move as one extraction unit because `claudemd.ts` depends on shared markdown IO helpers. |
-| `curated-sources.ts` + `matcher.ts` + required detector helpers/types | MOVE | `skills` package | Move as one extraction unit. `matcher.ts` depends on detector tags/types. |
-| `config.ts` | STAY | - | Tightly coupled to CLI persistent storage. |
-| `registry.ts` | STAY | - | Depends on config + git. CLI plumbing. |
-| `detector/` (project detection runtime) | DEFER | - | Broad detector runtime remains in hooks for now; only matcher-required helpers/types move with matcher unit. |
-| `commands/`, `middleware/`, `router/`, `workflow/`, `tracker/`, `sandbox/`, `hooks/` | STAY | - | CLI command handlers and enforcement. |
+The entire `@4meta5/skills-cli` package moves to `skillex/packages/skills-cli`. All modules move together. No split ownership.
 
 ## Migration Order
 
@@ -32,11 +25,12 @@ Step 1: skill-loader        (leaf, no @4meta5 deps)
 Step 2: project-detector    (leaf, parallel with step 1)
 Step 3: semantic-matcher    (leaf, parallel with steps 1-2)
 Step 4: skills              (depends on skill-loader from step 1)
-Step 5A: CLAUDE.md unit extraction (claudemd.ts + shared/markdown.ts into skills)
-Step 5B: matching unit extraction (curated-sources.ts + matcher.ts + required detector helpers/types into skills)
+Step 5: skills-cli           (full CLI package, depends on all above)
+Step 6: chain                (depends on nothing within skillex)
+Step 7: workflow-enforcer    (depends on nothing within skillex)
 ```
 
-Steps 1-3 are independent and can execute in parallel. Step 4 depends on step 1. Steps 5A/5B depend on step 4 and follow extraction-unit rules below.
+Steps 1-3 are independent and can execute in parallel. Step 4 depends on step 1. Steps 5-7 can execute in parallel after steps 1-4.
 
 ## Extraction Unit Rule (SOTA Convention)
 
@@ -53,8 +47,12 @@ skillex/
     project-detector/
     semantic-matcher/
     skills/
+    skills-cli/
+    chain/
+    workflow-enforcer/
   docs/
     extraction-matrix.md
+    migration-notes.md
   package.json            # workspace root
   PLAN.md
   CLAUDE.md

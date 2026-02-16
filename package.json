@@ -4,8 +4,11 @@
   "type": "module",
   "workspaces": ["packages/*"],
   "scripts": {
-    "build": "npm run build --workspaces",
-    "test": "npm run test --workspaces",
-    "typecheck": "npm run typecheck --workspaces"
+    "build": "npm run build -w @4meta5/skill-loader && npm run build -w @4meta5/project-detector && npm run build -w @4meta5/semantic-matcher && npm run build -w @4meta5/workflow-enforcer && npm run build -w @4meta5/chain && npm run build -w @4meta5/skills && npm run build -w @4meta5/skills-cli",
+    "build:cli": "npm run build -w @4meta5/skills-cli",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "skills": "node packages/skills-cli/bin/skills.js",
+    "sk": "node packages/skills-cli/bin/skills.js"
   }
 }

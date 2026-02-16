@@ -33,12 +33,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/4meta5/skills.git",
+    "url": "git+https://github.com/4meta5/skillex.git",
     "directory": "packages/project-detector"
   },
-  "homepage": "https://github.com/4meta5/skills#readme",
+  "homepage": "https://github.com/4meta5/skillex#readme",
   "bugs": {
-    "url": "https://github.com/4meta5/skills/issues"
+    "url": "https://github.com/4meta5/skillex/issues"
   },
   "dependencies": {
     "smol-toml": "^1.1.4",
