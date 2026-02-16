@@ -123,7 +123,6 @@ SKILLS_CLI=""
 for cmd in \\
   "\${CLAUDE_PROJECT_DIR}/packages/skills-cli/bin/skills.js" \\
   "\${CLAUDE_PROJECT_DIR}/node_modules/.bin/skills" \\
-  "\${CLAUDE_PROJECT_DIR}/../skillex/packages/skills-cli/bin/skills.js" \\
   "$(command -v skills 2>/dev/null)" \\
   "\${HOME}/.npm-global/bin/skills"
 do

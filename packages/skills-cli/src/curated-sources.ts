@@ -23,12 +23,12 @@ export interface CuratedSource {
  * When multiple skills serve the same purpose, keep the most comprehensive/maintained one.
  */
 export const CURATED_SOURCES: CuratedSource[] = [
-  // Core development skills from 4meta5/skills
+  // Core development skills from 4meta5/hooks
   // These are foundational skills for any TypeScript/Rust project
   {
     source: {
       name: '4meta5-skills',
-      url: 'https://github.com/4meta5/skills',
+      url: 'https://github.com/4meta5/hooks',
       type: 'git'
     },
     description: 'Core development skills: TDD, code review, refactoring, and workflow',

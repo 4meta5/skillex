@@ -310,7 +310,7 @@ Add to your `.claude/settings.json`:
 
 ## Related Skills
 
-Chain works with skills from [4meta5/skills](https://github.com/4meta5/skills):
+Chain works with curated skill sources (for example [4meta5/hooks](https://github.com/4meta5/hooks)):
 
 - **tdd** - Test-Driven Development (RED → GREEN → REFACTOR)
 - **dogfood** - Enforce dogfooding the tools you build
