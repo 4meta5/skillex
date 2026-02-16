@@ -1,0 +1,31 @@
+// Main library exports
+export { createSkillsLibrary } from './library.js';
+
+// Re-export from @4meta5/skill-loader for backwards compatibility
+export {
+  loadSkillFromPath,
+  loadSkillsFromDirectory,
+  parseFrontmatter,
+  discoverSupportingFiles,
+} from '@4meta5/skill-loader';
+
+// Types and constants
+export { SKILL_CATEGORIES } from './types.js';
+export type {
+  Skill,
+  SkillMetadata,
+  SkillCategory,
+  ProjectTemplate,
+  FileStructure,
+  InstallOptions,
+  SkillsLibraryOptions,
+  SkillsLibrary,
+  ParsedFrontmatter
+} from './types.js';
+
+// Categories
+export * from './categories/index.js';
+
+// Templates
+export { newTsProject } from './templates/new-project.js';
+export { extendWithTesting, extendWithSecurity } from './templates/extend-project.js';
