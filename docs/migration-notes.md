@@ -1,6 +1,6 @@
 # Migration Notes
 
-Packages extracted from [hooks](https://github.com/4meta5/hooks) into skillex.
+Migration complete (2026-02-16). All TypeScript packages extracted from [hooks](https://github.com/4meta5/hooks) into skillex. Hooks retains only runtime shell assets.
 
 ## Package Map
 

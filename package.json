@@ -7,7 +7,8 @@
   "scripts": {
     "build": "npm run build -w @4meta5/skill-loader && npm run build -w @4meta5/project-detector && npm run build -w @4meta5/semantic-matcher && npm run build -w @4meta5/workflow-enforcer && npm run build -w @4meta5/chain && npm run build -w @4meta5/skills && npm run build -w @4meta5/skills-cli",
     "build:cli": "npm run build -w @4meta5/skills-cli",
-    "test": "npm run test --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present && bash scripts/check-no-hooks-coupling.sh",
+    "lint:coupling": "bash scripts/check-no-hooks-coupling.sh",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "skills": "node packages/skills-cli/bin/skills.js",
     "sk": "node packages/skills-cli/bin/skills.js"

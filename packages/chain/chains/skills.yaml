@@ -96,7 +96,7 @@ skills:
     artifacts:
       - name: scan_run
         type: command_success
-        command: ./packages/cli/bin/skills.js scan
+        command: ./packages/skills-cli/bin/skills.js scan
     tool_policy: {}
 
   # Cleans up test artifacts and slop
