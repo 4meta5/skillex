@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Skills CLI shim - ensures the project-local CLI is used over any global install.
+# When setup-shims.sh prepends this directory to PATH, this wrapper intercepts
+# bare \`skills\` invocations and routes them to the project-local binary.
+
+# Find the real skills binary by skipping this shim's directory in PATH
+shim_dir="$(cd "$(dirname "$0")" && pwd)"
+
+# If CLAUDE_PROJECT_DIR is set, prefer the project-local binary
+if [[ -n "${CLAUDE_PROJECT_DIR:-}" ]]; then
+  local_bin="${CLAUDE_PROJECT_DIR}/packages/cli/bin/skills.js"
+  if [[ -x "$local_bin" ]]; then
+    exec node "$local_bin" "$@"
+  fi
+fi
+
+# Otherwise, walk PATH to find the real skills binary (skip this shim)
+IFS=: read -ra path_entries <<<"${PATH:-}"
+for dir in "${path_entries[@]}"; do
+  resolved="$(cd "$dir" 2>/dev/null && pwd)" || continue
+  [[ "$resolved" == "$shim_dir" ]] && continue
+  if [[ -x "$dir/skills" ]]; then
+    exec "$dir/skills" "$@"
+  fi
+done
+
+echo "ERROR: real skills binary not found on PATH" >&2
+exit 127
